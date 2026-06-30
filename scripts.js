@@ -749,6 +749,40 @@ function applyAdminRestrictions(operateur) {
 // CHOIX RONDE / REVUE
 // ============================================================
 
+function annulerChoixRonde() {
+  // Réinitialiser les variables de session
+  varSession = {
+    session: null,
+    "id-operateur": null,
+    "id-type-ronde": null,
+    "id-compteur": null,
+    "date-releve": null,
+    "heure-releve": null,
+  };
+
+  // Réinitialiser le formulaire de choix
+  document.getElementById("choixRevue").checked = true;
+  document.getElementById("choixTypeRondeGroup").style.display = "none";
+  document.getElementById("choixTypeRonde").value = "";
+
+  // Réinitialiser les champs du formulaire de relevé
+  document.getElementById("operateur").value = "";
+  document.getElementById("operateur").disabled = true;
+  document.getElementById("id_ronde").value = "";
+  document.getElementById("id_ronde").disabled = true;
+  document.getElementById("compteur").value = "";
+  document.getElementById("compteur").disabled = true;
+  document.getElementById("valeurActuelle").value = "";
+
+  // Réinitialiser les champs de login
+  document.getElementById("loginUser").value = "";
+  document.getElementById("loginMdp").value = "";
+
+  // Afficher le panneau de login
+  document.getElementById("choixRondePanel").style.display = "none";
+  document.getElementById("loginPanel").style.display = "block";
+}
+
 function setupChoixRonde() {
   document.querySelectorAll('input[name="choix_ronde"]').forEach((radio) => {
     radio.addEventListener("change", function () {
@@ -760,6 +794,10 @@ function setupChoixRonde() {
       }
     });
   });
+
+  document
+    .getElementById("annulerChoixRonde")
+    .addEventListener("click", annulerChoixRonde);
 
   document
     .getElementById("validerChoixRonde")
